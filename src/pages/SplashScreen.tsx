@@ -5,7 +5,6 @@ import { DiamondMark } from '../components/Layout'
 export default function SplashScreen() {
   const navigate = useNavigate()
   const [entered, setEntered] = useState(false)
-
   useEffect(() => { const t = setTimeout(() => setEntered(true), 200); return () => clearTimeout(t) }, [])
   function enter() { navigate('/masters') }
 
@@ -22,13 +21,9 @@ export default function SplashScreen() {
             <div className="absolute inset-2 rounded-full border border-onyx-600/20" />
             <svg viewBox="0 0 384 208" className="absolute inset-0 h-full w-full drop-shadow-[0_0_40px_rgba(22,161,107,0.15)]">
               <defs>
-                <linearGradient id="teaGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#0c523a" /><stop offset="50%" stopColor="#16a16b" /><stop offset="100%" stopColor="#0c8057" />
-                </linearGradient>
-                <linearGradient id="coffeeGrad" x1="1" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#61351d" /><stop offset="50%" stopColor="#cf7a2e" /><stop offset="100%" stopColor="#934d20" />
-                </linearGradient>
-                <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+                <linearGradient id="teaGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#0c523a" /><stop offset="50%" stopColor="#16a16b" /><stop offset="100%" stopColor="#0c8057" /></linearGradient>
+                <linearGradient id="coffeeGrad" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#61351d" /><stop offset="50%" stopColor="#cf7a2e" /><stop offset="100%" stopColor="#934d20" /></linearGradient>
+                <filter id="glow"><feGaussianBlur stdDeviation="3" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
               </defs>
               <path d="M192 8 L8 104 L192 200 Z" fill="url(#teaGrad)" opacity="0.9" filter="url(#glow)" />
               <path d="M192 8 L376 104 L192 200 Z" fill="url(#coffeeGrad)" opacity="0.9" filter="url(#glow)" />

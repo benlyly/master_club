@@ -7,14 +7,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   const { user, master, signOut } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
-
-  const navLinks = [
-    { to: '/masters', label: 'Masters' },
-    { to: '/card', label: 'Card Studio' },
-  ]
+  const navLinks = [{ to: '/masters', label: 'Masters' }, { to: '/card', label: 'Card Studio' }]
   if (user && master) navLinks.push({ to: '/me', label: 'Dashboard' })
-
-  async function handleSignOut() { await signOut(); navigate('/') }
+  async function out() { await signOut(); navigate('/') }
 
   return (
     <div className="min-h-screen bg-onyx-950 text-pearl-100">
@@ -25,17 +20,13 @@ export default function Layout({ children }: { children: ReactNode }) {
             <span className="font-serif text-xl tracking-wide text-pearl-100">master<span className="text-jade-400">.</span>club</span>
           </Link>
           <nav className="flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link key={link.to} to={link.to}
-                className={cn('link-underline text-sm font-medium tracking-wide transition-colors',
-                  location.pathname === link.to ? 'text-pearl-100' : 'text-pearl-500 hover:text-pearl-100')}>
-                {link.label}
-              </Link>
+            {navLinks.map((l) => (
+              <Link key={l.to} to={l.to} className={cn('link-underline text-sm font-medium tracking-wide transition-colors', location.pathname === l.to ? 'text-pearl-100' : 'text-pearl-500 hover:text-pearl-100')}>{l.label}</Link>
             ))}
             {user ? (
               <div className="flex items-center gap-4">
-                {master && <Link to={`/m/${master.id}`} className="text-sm font-medium text-jade-400 hover:text-jade-300 transition-colors">{master.name}</Link>}
-                <button onClick={handleSignOut} className="text-sm text-pearl-500 hover:text-pearl-100 transition-colors">Sign out</button>
+                {master && <Link to={`/m/${master.id}`} className="text-sm font-medium text-jade-400 hover:text-jade-300">{master.name}</Link>}
+                <button onClick={out} className="text-sm text-pearl-500 hover:text-pearl-100">Sign out</button>
               </div>
             ) : (
               <Link to="/auth" className="rounded-full border border-onyx-600 px-5 py-2 text-sm font-medium text-pearl-100 hover:border-jade-500/50 hover:bg-jade-900/20 transition-all">Sign in</Link>
@@ -45,12 +36,10 @@ export default function Layout({ children }: { children: ReactNode }) {
       </header>
       <main>{children}</main>
       <footer className="border-t border-onyx-800 mt-20">
-        <div className="mx-auto max-w-7xl px-6 py-10">
-          <div className="flex flex-col items-center gap-4">
-            <DiamondMark className="h-8 w-8 opacity-60" />
-            <p className="font-serif italic text-pearl-500 text-center text-sm">...find the one whose love you drink...</p>
-            <p className="text-xs text-onyx-400 mt-2">master.club — the global H2H ecosystem for baristas and tea masters</p>
-          </div>
+        <div className="mx-auto max-w-7xl px-6 py-10 flex flex-col items-center gap-4">
+          <DiamondMark className="h-8 w-8 opacity-60" />
+          <p className="font-serif italic text-pearl-500 text-center text-sm">...find the one whose love you drink...</p>
+          <p className="text-xs text-onyx-400 mt-2">master.club — the global H2H ecosystem for baristas and tea masters</p>
         </div>
       </footer>
     </div>

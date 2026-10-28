@@ -9,7 +9,7 @@ import Dashboard from './pages/Dashboard'
 import PrintGenerator from './pages/PrintGenerator'
 import Layout from './components/Layout'
 
-function ProtectedRoute({ children }: { children: ReactNode }) {
+function Protected({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth()
   if (loading) return null
   if (!user) return <Navigate to="/auth" replace />
@@ -24,7 +24,7 @@ export default function App() {
       <Route path="/m/:id" element={<MasterProfile />} />
       <Route path="/masters" element={<Layout><MastersDirectory /></Layout>} />
       <Route path="/card" element={<Layout><PrintGenerator /></Layout>} />
-      <Route path="/me" element={<ProtectedRoute><Layout><Dashboard /></Layout></ProtectedRoute>} />
+      <Route path="/me" element={<Protected><Layout><Dashboard /></Layout></Protected>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
